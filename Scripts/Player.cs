@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IkitchenObjectParrent
+public class Player : NetworkBehaviour, IkitchenObjectParrent
 
 {
 
-    public static Player Instance { get; private set; }
+  //   public static Player Instance { get; private set; }
+
     public  event EventHandler OnPickingUp;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
@@ -17,18 +19,14 @@ public class Player : MonoBehaviour, IkitchenObjectParrent
     }
 
     [SerializeField] private float speed=10f;
-    [SerializeField] private GameInput gameInput;
+    
     [SerializeField] private LayerMask CounterLayerMask;
     [SerializeField] private Transform KitchenObjectHoldPoint;
 
 
     private void Awake()
     {
-        if(Instance != null)
-        {
-            Debug.LogError("There is more than one player instance");
-        }
-        Instance = this;
+       // Instance = this;
     }
 
     private bool iswalk;
@@ -37,8 +35,8 @@ public class Player : MonoBehaviour, IkitchenObjectParrent
     private KitchenObject kitchenobject;
     private void Start()
     {
-        gameInput.OnInteraction += GameInput_OnInteraction;
-        gameInput.OnInteractionAlternate += GameInput_OnInteractionAlternate;
+        GameInput.Instance.OnInteraction += GameInput_OnInteraction;
+        GameInput.Instance.OnInteractionAlternate += GameInput_OnInteractionAlternate;
     }
 
     private void GameInput_OnInteractionAlternate(object sender, EventArgs e)
@@ -72,7 +70,7 @@ public class Player : MonoBehaviour, IkitchenObjectParrent
 
    private void HandleInteractions()
 {
-    Vector2 inputVector = gameInput.GameVectorInputNormalized();
+    Vector2 inputVector = GameInput.Instance.GameVectorInputNormalized();
     Vector3 moveddir = new Vector3(inputVector.x, 0f, inputVector.y);
         if (moveddir != Vector3.zero)
         {
@@ -110,7 +108,7 @@ public class Player : MonoBehaviour, IkitchenObjectParrent
 
     private void HandleMovement()
     {
-        Vector2 inputVector = gameInput.GameVectorInputNormalized();
+        Vector2 inputVector = GameInput.Instance.GameVectorInputNormalized();
 
         Vector3 moveddir = new Vector3(inputVector.x, 0f, inputVector.y);
 
