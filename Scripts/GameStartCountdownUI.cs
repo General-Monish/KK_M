@@ -13,7 +13,7 @@ public class GameStartCountdownUI : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
-
+    // nothing 
     private void Start()
     {
         KitchenGameManager.Instance.Onstatechang += KitchenGameManager_Onstatechang;
