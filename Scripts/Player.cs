@@ -9,9 +9,16 @@ public class Player : NetworkBehaviour, IkitchenObjectParrent
 
 {
 
-  //   public static Player Instance { get; private set; }
+    public static event EventHandler OnAnyPlayerSpawned;
+    public static event EventHandler OnAnyPickedSomething;
+    public static void ResetStaticData()
+    {
+        OnAnyPlayerSpawned = null;
+    }
 
-    public  event EventHandler OnPickingUp;
+    public static Player Localinstance { get; private set; }
+
+    public event EventHandler OnPickingUp;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
@@ -24,9 +31,13 @@ public class Player : NetworkBehaviour, IkitchenObjectParrent
     [SerializeField] private Transform KitchenObjectHoldPoint;
 
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
-       // Instance = this;
+        if (IsOwner)
+        {
+            Localinstance = this;
+        }
+        OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
     }
 
     private bool iswalk;
@@ -185,6 +196,7 @@ public class Player : NetworkBehaviour, IkitchenObjectParrent
         if (kitchenObject != null)
         {
             OnPickingUp?.Invoke(this, EventArgs.Empty);
+            OnAnyPickedSomething?.Invoke(this, EventArgs.Empty);
         }
     }
 
