@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5280544940240035380}
   - component: {fileID: 6577255112361894006}
   - component: {fileID: 2770543391461393324}
+  - component: {fileID: 1838399024302035625}
   m_Layer: 0
   m_Name: cheez
   m_TagString: Untagged
@@ -63,6 +64,18 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &1838399024302035625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8266240581097296036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6d90238aebbf54aa09ad0d02d6e101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5249618936801824447
 PrefabInstance:
   m_ObjectHideFlags: 0

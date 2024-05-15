@@ -16,8 +16,9 @@ public class PlateKitchenObject : KitchenObject
     // Start is called before the first frame update
     private List<KitchenObjectSO> kitchenObjectSOList;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         kitchenObjectSOList = new List<KitchenObjectSO>();
     }
     public bool TryAddingredient(KitchenObjectSO kitchenObjectSO)

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class BaseCounter : MonoBehaviour, IkitchenObjectParrent
+public class BaseCounter : NetworkBehaviour, IkitchenObjectParrent
 {
 
     public static event EventHandler OnAnyObjDropHere;
@@ -56,6 +56,6 @@ public class BaseCounter : MonoBehaviour, IkitchenObjectParrent
 
     public NetworkObject GetNetworkObject()
     {
-        return null;
+        return NetworkObject;
     }
 }
